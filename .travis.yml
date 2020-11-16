@@ -1,0 +1,13 @@
+language: julia
+julia:
+  - nightly
+  - 1.3.1
+  - 1.5
+
+
+codecov: true
+coveralls: true
+
+using Pkg
+Pkg.build(; verbose=true)
+Pkg.test(coverage=true)
