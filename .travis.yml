@@ -7,10 +7,6 @@ julia:
 codecov: true
 coveralls: true
 
-using Pkg
-Pkg.build(; verbose=true)
-Pkg.test(coverage=true)
-
 jobs:
   include:
     - stage: "Documentation"
