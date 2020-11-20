@@ -2,12 +2,26 @@ using Diana, JSON, HTTP
 
 export GitHubError, Connection
 
+"""
+    Error
+
+Simple error wrapper.
+"""
 struct Error
     name::String
     type::String
     message::String
 end
 
+"""
+    GitHubError
+
+Any error related to the repository connection.
+
+The error is created with either:
+- A `HTTP.ExceptionRequest.StatusError`
+- A failling `Diana.Result`
+"""
 struct GitHubError <: Exception
     errors::Vector{Error}
 
@@ -30,6 +44,11 @@ struct GitHubError <: Exception
     end
 end
 
+"""
+    Connection
+
+Simple wrapper around `Diana.Client` with the current repository name and owner.
+"""
 struct Connection
     owner::String
     name::String
@@ -41,6 +60,12 @@ struct Connection
     end
 end
 
+"""
+    query(connection::Connection, queryString)
+
+The base function to make the queries.
+It wraps the provided query in a "repository" query. It also handles connection and result errors.
+"""
 function query(connection::Connection, queryString::AbstractString)
     result = Diana.Result("", "")
     try

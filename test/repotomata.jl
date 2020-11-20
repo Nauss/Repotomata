@@ -8,7 +8,7 @@ using FileIO
     end
 
     @testset "raw output" begin
-        images = repotomata("JuliaLang", "Julia", nb_epochs=5, width=100)
+        images = repotomata("JuliaLang", "Julia", epochs=5, width=100)
         @test size(images, 1) == 6
         @test size(images[1]) == (61, 100)
     end

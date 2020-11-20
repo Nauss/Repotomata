@@ -63,12 +63,6 @@ git-tree-sha1 = "0c91e4fcda51bbd881c5d49ef784460750abcac0"
 uuid = "aafaddc9-749c-510e-ac4f-586e18779b91"
 version = "0.2.1"
 
-[[CodeTracking]]
-deps = ["InteractiveUtils", "UUIDs"]
-git-tree-sha1 = "ce725fcc331618c422e5561a5183baab6a00482c"
-uuid = "da1fd8a2-8d9e-5ec2-8556-3022fb5608a2"
-version = "1.0.4"
-
 [[ColorTypes]]
 deps = ["FixedPointNumbers", "Random"]
 git-tree-sha1 = "4bffea7ed1a9f0f3d1a131bbcd4b925548d75288"
@@ -201,9 +195,6 @@ deps = ["Pkg"]
 git-tree-sha1 = "cad2e71389ecb2f4480e0de74faab04af13d7929"
 uuid = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
 version = "1.4.4"
-
-[[FileWatching]]
-uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[FixedPointNumbers]]
 deps = ["Statistics"]
@@ -451,12 +442,6 @@ git-tree-sha1 = "9aff0587d9603ea0de2c6f6300d9f9492bbefbd3"
 uuid = "aacddb02-875f-59d6-b918-886e6ef4fbf8"
 version = "2.0.1+3"
 
-[[JuliaInterpreter]]
-deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]
-git-tree-sha1 = "8f1c59bbca30b0d293f4b2436af49ef4c9c4d601"
-uuid = "aa1ae85d-cabe-5617-a682-6adf51b2e16a"
-version = "0.8.2"
-
 [[LZO_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "f128cd6cd05ffd6d3df0523ed99b90ff6f9b349a"
@@ -530,12 +515,6 @@ uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 
 [[Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
-
-[[LoweredCodeUtils]]
-deps = ["JuliaInterpreter"]
-git-tree-sha1 = "92b9819125eac5013c99070f696ec0ec5fc66436"
-uuid = "6f1432cf-f94c-5a45-995e-cdbf5db27b0b"
-version = "1.2.4"
 
 [[MKL_jll]]
 deps = ["IntelOpenMP_jll", "Libdl", "Pkg"]
@@ -686,12 +665,6 @@ deps = ["UUIDs"]
 git-tree-sha1 = "2fc2e1ab606a5dca7bbad9036a694553c3a57926"
 uuid = "ae029012-a4dd-5104-9daa-d747884805df"
 version = "1.0.3"
-
-[[Revise]]
-deps = ["CodeTracking", "Distributed", "FileWatching", "JuliaInterpreter", "LibGit2", "LoweredCodeUtils", "OrderedCollections", "Pkg", "REPL", "Requires", "UUIDs", "Unicode"]
-git-tree-sha1 = "bfe3d98de018f96d472029b00f6a14478a042171"
-uuid = "295af30f-e4ad-537b-8983-00126c2a3abe"
-version = "3.1.6"
 
 [[Rotations]]
 deps = ["LinearAlgebra", "StaticArrays", "Statistics"]

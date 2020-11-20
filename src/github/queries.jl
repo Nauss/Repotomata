@@ -1,3 +1,8 @@
+"""
+    make_language_query(pageSize, after)
+
+Provide access to all the languages from the repository given the correct `pageSize` and `after`.
+"""
 make_language_query(pageSize, after) = begin
     if after == ""
         query = "languages(first: $pageSize) {"

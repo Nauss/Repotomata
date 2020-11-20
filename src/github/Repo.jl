@@ -5,19 +5,35 @@ include("Connection.jl")
 
 export Repo, Language, create_palette
 
+"""
+    Language
+
+When parsed from GitHub a `Language` has a `name`, `color` and the "usage" `size`.
+See also: [`Repo`](@Repo)
+"""
 struct Language
     name::String
     color::Colorant
     size::Int
 
-    # Constructor
+    """
+        Language(name, color, size) 
+        Language(name, Nothing, size)
+
+    The `Language` constructor.
+    """
     function Language(name::String, color::String, size::Int) 
-        new(name, parse(RGB, color), size)
+        new(name, parse(RGB{Float64}, color), size)
     end
     Language(name::String, color::Nothing, size::Int) = Language(name, "#000000", size) 
 end
 
+"""
+    Repo
 
+Wrapper representing the GitHub Repository.
+See also: [`Language`](@Language)
+"""
 struct Repo
     owner::String
     name::String
@@ -26,9 +42,17 @@ struct Repo
     forks_count::UInt
     watchers_count::UInt
     updatedat::DateTime
+    background_color::Colorant
 
-    # Constructor
-    function Repo(owner::AbstractString, name::AbstractString) 
+
+    """
+        Repo
+
+    The `Repo` constructor will create a `Connection` with the given `owner/name` and query the 
+    needed information.
+    See also: [`Connection`](@Connection)
+    """
+    function Repo(owner::AbstractString, name::AbstractString, background_color::Colorant) 
         connection = Connection(owner, name)
 
         # Query information
@@ -53,7 +77,8 @@ struct Repo
         stargazer_count,
         forks_count,
         watchers_count,
-        updatedat)
+        updatedat,
+        background_color)
     end
 end
 
@@ -64,15 +89,27 @@ Forks: $(repo.forks_count)
 Watchers: $(repo.watchers_count)
 """)
 
+"""
+    getparameters(parameters, repo)
+
+Dump the `repo` parameters into the given `parameters` Dict
+"""
 function getparameters!(parameters::Dict, repo::Repo)
     parameters["color"] = repo.languages[1].color
-    parameters["stargazerCount"] = repo.stargazer_count
-    parameters["forksCount"] = repo.forks_count
-    parameters["updatedAt"] = repo.updatedat
-    parameters["watchersCount"] = repo.watchers_count
+    parameters["stargazers"] = repo.stargazer_count
+    parameters["forks"] = repo.forks_count
+    parameters["updatedat"] = repo.updatedat
+    parameters["watchers"] = repo.watchers_count
+    parameters["background_color"] = repo.background_color
     parameters["palette"] = create_palette(repo)
 end
 
+"""
+    get_languages(connection)
+
+Utility function used to query all the languages of the repository.
+Return a Vector of `Languages` sorted by size (bigger first).
+"""
 function get_languages(connection::Connection)
     result::Vector{Language} = Vector(undef, 0)
 
@@ -106,13 +143,23 @@ function get_languages(connection::Connection)
     return result
 end
 
+"""
+    create_palette(repo)
+
+Utility function used to create a color palette from the repositoty languages.
+"""
 function create_palette(repo::Repo)
+    background_color = repo.background_color
     palette_size = PALETTE_SIZE
     palette = Vector(undef, 0)
     coeff_l, coeff_a, coeff_b = 50, 5, 5
     
     total_size = sum(language -> language.size, repo.languages)
     for language in repo.languages
+        if language.color == background_color
+            # Ignore languages with the same color as the background
+            continue
+        end
         nbcolors = ceil(Int, language.size * palette_size / total_size)
         half_colors_index = round(Int, nbcolors / 2)
         labcolor = convert(Lab, language.color)
@@ -139,5 +186,6 @@ function create_palette(repo::Repo)
         end
     end
    
-    return palette
+    # Make sure the palette does not contain the same color as the background
+    return filter(color -> color ≠ background_color, palette)
 end
