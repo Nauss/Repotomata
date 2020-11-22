@@ -1,6 +1,6 @@
 # Repotomata.jl
 
-[![Build Status](https://travis-ci.com/Nauss/Repotomata.svg?branch=main)](https://travis-ci.com/Nauss/Repotomata)
+[![][docs-stable-img]][docs-stable-url] [![Build Status][action-img]][action-url]
 
 Create an animated gif from a GitHub repository using cellular automata.
 
@@ -11,6 +11,8 @@ images = repotomata("JuliaLang/Julia")
 repotomata("JuliaLang/Julia", output=Repotomata.viewer)
 repotomata("JuliaLang/Julia", output=Repotomata.gif, output_path="test.gif")
 ```
+
+Read the [documentation][docs-stable-url] for more information.
 
 ## Examples
 
