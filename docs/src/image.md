@@ -7,7 +7,7 @@ CurrentModule = Repotomata
 ```@docs
 create_image(width::Int, height::Int, parameters::Dict)
 generate_images(input::Dict)
-newgeneration(image::AbstractArray{<:Colorant,2}, rule::Rule)
+newgeneration(image::AbstractArray{<:Colorant,2}, rule::Rule, background_color::Colorant)
 getpixel(image::AbstractArray{<:Colorant,2}, position::Point)
 setpixel!(image::AbstractArray{<:Colorant,2}, position::Point, color::Colorant)
 ```

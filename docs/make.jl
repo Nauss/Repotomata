@@ -11,3 +11,7 @@ makedocs(
         "Image functions" => "image.md"
     ]
 )
+
+deploydocs(
+    repo="github.com/Nauss/Repotomata.git",
+)

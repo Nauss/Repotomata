@@ -68,7 +68,7 @@ function getpixel(image::AbstractArray{<:Colorant,2}, position::Point)::Colorant
 end
 
 """
-    newgeneration(image, rule)
+    newgeneration(image, rule, background_color)
 
 Produce a new image by applying the `rule` to the given `image`.
 """
