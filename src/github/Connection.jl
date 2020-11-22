@@ -27,6 +27,7 @@ Any error related to the repository connection.
 The error is created with either:
 - A `HTTP.ExceptionRequest.StatusError`
 - A failling `Diana.Result`
+- A string (for now only for the token error)
 
 # Fields
 - `errors::Vector{Error}`: a collection of [`Error`](@ref)s.
@@ -52,6 +53,13 @@ struct GitHubError <: Exception
         )
         new(errors)
     end
+    function GitHubError(error::AbstractString)
+        errors = fill(
+            Error("GitHub token missing", "Env: GITHUB_TOKEN is missing", "Please provide your GitHub token via the GITHUB_TOKEN environment variable"),
+            1
+        )
+        new(errors)
+    end
 end
 
 """
@@ -71,6 +79,10 @@ struct Connection
     client::Diana.Client
 
     function Connection(owner::AbstractString, name::AbstractString)
+        GITHUB_TOKEN = haskey(ENV, "GITHUB_TOKEN") ? ENV["GITHUB_TOKEN"] : ""
+        if GITHUB_TOKEN == ""
+            throw(GitHubError("token"))
+        end
         client = GraphQLClient(GITHUB_URL, auth="Bearer $GITHUB_TOKEN")
         new(owner, name, client)
     end

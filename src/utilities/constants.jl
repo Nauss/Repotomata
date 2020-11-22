@@ -7,7 +7,6 @@ const MAX_FORKS = 300000;
 const MAX_WATCHERS = 30000;
 # GitHub
 const GITHUB_URL = "https://api.github.com/graphql"
-const GITHUB_TOKEN = ENV["GITHUB_TOKEN"]
 const GITHUB_DATE = "yyyy-mm-ddTHH:MM:SSZ"
 # Image
 const white = RGB(1.0, 1.0, 1.0)

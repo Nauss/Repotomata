@@ -21,6 +21,15 @@ include("../src/utilities/constants.jl")
         @test_throws GitHubError Repo("Paul", "Poule", RGB{Float64}(0.0, 0.0, 0.0))
     end
 
+    @testset "No token" begin
+        # Remove the token
+        token = ENV["GITHUB_TOKEN"]
+        ENV["GITHUB_TOKEN"] = ""
+        @test_throws GitHubError Repo("JuliaLang", "Julia", RGB{Float64}(0.0, 0.0, 0.0))
+        # Restore the token for other tests
+        ENV["GITHUB_TOKEN"] = token
+    end
+
     @testset "create_palette" begin
         repo = Repo("JuliaLang", "Julia", RGB{Float64}(0.0, 0.0, 0.0))
         palette = create_palette(repo)
