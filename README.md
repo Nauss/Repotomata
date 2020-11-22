@@ -1,6 +1,6 @@
 # Repotomata.jl
 
-[![][docs-stable-img]][docs-stable-url] [![Build Status][action-img]][action-url]
+[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://nauss.github.io/Repotomata/dev) [![Build Status](https://travis-ci.org/Nauss/Repotomata.svg?branch=main)](https://travis-ci.org/Nauss/Repotomata)
 
 Create an animated gif from a GitHub repository using cellular automata.
 
