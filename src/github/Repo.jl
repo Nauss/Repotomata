@@ -9,7 +9,13 @@ export Repo, Language, create_palette
     Language
 
 When parsed from GitHub a `Language` has a `name`, `color` and the "usage" `size`.
-See also: [`Repo`](@Repo)
+
+# Fields
+- `name::String`: the language name.
+- `color::Colorant`: the language color (provided by [github/linguist](https://github.com/github/linguist)).
+- `size::Int`: the relative usage of this [`Language`](@ref) in the repository.
+
+See also: [`Repo`](@ref)
 """
 struct Language
     name::String
@@ -32,7 +38,18 @@ end
     Repo
 
 Wrapper representing the GitHub Repository.
-See also: [`Language`](@Language)
+
+# Fields
+- `owner::String`: the repository owner.
+- `name::String`: the repository name.
+- `languages::Vector{Language}`: the repository [`Language`](@ref)s.
+- `stargazer_count::UInt`: the repository stargazer count.
+- `forks_count::UInt`: the repository forks count.
+- `watchers_count::UInt`: the repository watchers count.
+- `updatedat::DateTime`: the repository last update time.
+- `background_color::Colorant`: the chosen background color
+
+See also: [`Language`](@ref)
 """
 struct Repo
     owner::String
@@ -45,12 +62,13 @@ struct Repo
     background_color::Colorant
 
 
-    """
+    @doc """
         Repo
 
     The `Repo` constructor will create a `Connection` with the given `owner/name` and query the 
     needed information.
-    See also: [`Connection`](@Connection)
+
+    See also: [`Connection`](@ref)
     """
     function Repo(owner::AbstractString, name::AbstractString, background_color::Colorant) 
         connection = Connection(owner, name)
@@ -108,7 +126,7 @@ end
     get_languages(connection)
 
 Utility function used to query all the languages of the repository.
-Return a Vector of `Languages` sorted by size (bigger first).
+Return a Vector of [`Language`](@ref)s sorted by size (bigger first).
 """
 function get_languages(connection::Connection)
     result::Vector{Language} = Vector(undef, 0)

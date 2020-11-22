@@ -3,17 +3,20 @@ using PaddedViews
 """
     An automata rule
 
-A rule is composed of
+The rule is applied to all the image pixel for each epoch.
+
+# Fields
 - `neighbours`: the pixels (relative positions) observered when applying the contidtion.
 - `condition`: this function is called for each pixel and must return the new color.
 - `extent`: the image padding needed by the neighbours.
+
 """
 struct Rule
     neighbours::Vector{<:Point}
     condition::Function
     extent::Tuple{Int,Int}
     
-    """
+    @doc """
         Rule(neighbours, condition)
 
     The rule constructor.

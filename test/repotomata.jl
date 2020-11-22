@@ -3,8 +3,8 @@ using FileIO
 @testset "repotomata" begin
     @testset "raw output" begin
         images = repotomata("JuliaLang/Julia")
-        @test size(images, 1) == 11
-        @test size(images[1]) == (123, 200)
+        @test size(images, 1) == 251
+        @test size(images[1]) == (309, 500)
     end
 
     @testset "raw output" begin
@@ -17,7 +17,7 @@ using FileIO
         repotomata("JuliaLang/Julia", output=Repotomata.gif, output_path="test.gif")
         # The file exists with the correct size
         gif = load("test.gif")
-        @test size(gif) == (123, 200, 11)
+        @test size(gif) == (309, 500, 251)
         # Clean up
         rm("test.gif")
     end

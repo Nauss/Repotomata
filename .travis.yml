@@ -1,12 +1,27 @@
 language: julia
+sudo: true
+
+os:
+    - linux
+
+notifications:
+    email: false
+
 julia:
-  - nightly
   - 1.4
 
+addons:
+  apt:
+    packages:
+      - xvfb
+      - xauth
+      - libgtk-3-0
 
-codecov: true
-coveralls: true
-
+script:
+    - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+    - if [[ `uname` = "Linux" ]]; then TESTCMD='xvfb-run julia'; else TESTCMD='julia'; fi
+    - $TESTCMD -e 'using Pkg; Pkg.build()'
+    
 jobs:
   include:
     - stage: "Documentation"
@@ -15,5 +30,5 @@ jobs:
       script:
         - julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd()));
                                                Pkg.instantiate()'
-        - julia --project=docs/ docs/make.jl
+        - xvfb-run julia --project=docs/ docs/make.jl
       after_success: skip

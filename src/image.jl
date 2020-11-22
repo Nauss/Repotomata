@@ -72,10 +72,9 @@ end
 
 Produce a new image by applying the `rule` to the given `image`.
 """
-function newgeneration(image::AbstractArray{<:Colorant,2}, rule::Rule)
+function newgeneration(image::AbstractArray{<:Colorant,2}, rule::Rule, background_color::Colorant)
     # Create a new image to apply the rules but test the current generation
     newimage = copy(image)
-    background_color = rule.background_color
     
     # Pad the image for easy neighbours detection
     image_min = 1 .- rule.extent

@@ -1,6 +1,7 @@
 module Repotomata
 using Random, Serialization, JSON, FileIO
-using ColorTypes, ImageView, ImageAxes
+using ColorTypes, ImageAxes
+using ImageView
 
 include("utilities/constants.jl")
 include("Rule.jl")
@@ -30,16 +31,21 @@ See also: [`repotomata`](@ref)
 
 """
     repotomata(owner::AbstractString, name::AbstractString; <keyword arguments>)
+    repotomata(ownername::AbstractString; kwargs...)
 
 Generates a cellular automata animation of the given GitHub repository.
 
+!!! note
+    When using the second method, the format must be: "owner/name".
+
+
 # Arguments
 - `epochs::Int=10`: the number of generations to compute.
-- `width::Integer=200`: the output width (height will be automatically computed with the golden ratio).
+- `width::Integer=500`: the output width (height will be automatically computed with the golden ratio).
 - `output::OutputType=raw`: the output type.
 - `output_path::String=""`: the output path when using OutputType.gif.
-- `rule::String=""`: the output path when using OutputType.gif.
-- `seed_treshold::Real=0.6`: the threshold on the Perlin noise used as seed.
+- `rule::RuleType=chromatic`: the rule to use.
+- `seed_treshold::Real=0.58`: the threshold on the Perlin noise used as seed.
 - `background_color::Colorant=black`: the background color.
 """
 function repotomata(
@@ -82,6 +88,11 @@ repotomata(ownername::AbstractString; kwargs...) = begin
     repotomata(owner, name; kwargs...)
 end
 
+"""
+    open_viewer(images)
+
+Display the `images` in an interactive window.
+"""
 function open_viewer(images::Array{Array{ColorTypes.RGB{Float64},2},1})
     ImageView.closeall()
 

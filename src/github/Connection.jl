@@ -6,6 +6,12 @@ export GitHubError, Connection
     Error
 
 Simple error wrapper.
+
+# Fields
+- `name::String`: the error name.
+- `type::String`: the error type.
+- `message::String`: the error message.
+
 """
 struct Error
     name::String
@@ -21,6 +27,10 @@ Any error related to the repository connection.
 The error is created with either:
 - A `HTTP.ExceptionRequest.StatusError`
 - A failling `Diana.Result`
+
+# Fields
+- `errors::Vector{Error}`: a collection of [`Error`](@ref)s.
+
 """
 struct GitHubError <: Exception
     errors::Vector{Error}
@@ -48,6 +58,12 @@ end
     Connection
 
 Simple wrapper around `Diana.Client` with the current repository name and owner.
+
+# Fields
+- `owner::String`: the repository owner.
+- `name::String`: the repository name.
+- `client::Diana.Client`: the Diana.Client object.
+
 """
 struct Connection
     owner::String
