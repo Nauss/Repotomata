@@ -1,7 +1,7 @@
 name = "Repotomata"
 uuid = "36230cab-47f6-4611-a9ad-d42316f9a74f"
 authors = ["Bruno pommier <bpommier@gmail.com>"]
-version = "0.2.0"
+version = "0.1.0"
 
 [deps]
 ColorTypes = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
