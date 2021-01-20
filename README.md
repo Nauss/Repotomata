@@ -13,7 +13,7 @@ repotomata("JuliaLang/Julia", output=Repotomata.viewer)
 repotomata("JuliaLang/Julia", output=Repotomata.gif, output_path="test.gif")
 ```
 
-Read the [documentation][docs-stable-url] for more information.
+Read the [documentation](https://nauss.github.io/Repotomata/dev) for more information.
 
 ## Examples
 
